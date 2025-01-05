@@ -14,9 +14,22 @@
 <body>
   <div class="container">
     <h1>Bubble Thoughts</h1>
-    <p>Share anything with the world!</p>
+    <p>Got something on your mind?<br>Share it here, and watch your thoughts float away!</p>
     <p id="messageStatus">Loading message status...</p>
-    <!-- <a href="#"><img src="https://shorturl.at/0EdF7" style="width: 35px;height: auto;" /></a> -->
+    <a id="rulesButton">Rules</a>
+    <div id="rulesBox" class="rules-box">
+      <div class="rules-content">
+        <h3>Rules</h3>
+        <ul>
+          <li><strong>Be Kind:</strong> Share positive, thoughtful messages. Let's keep it friendly!</li>
+          <li><strong>No Spam:</strong> Please don’t flood the page with repetitive messages. Let's give everyone a chance to share their thoughts.</li>
+          <li><strong>Stay On Topic:</strong> This is a space for your thoughts and ideas, not for advertising or irrelevant content.</li>
+          <li><strong>Respect Others:</strong> Everyone's thoughts are valuable, so be respectful and considerate.</li>
+        </ul>
+        <button id="closeButton">Close</button>
+      </div>
+    </div>
+    <a href="https://github.com/justrals/bubble-thoughts" target="_blank"><img src="https://shorturl.at/0EdF7" style="width: 35px;height: auto;" /></a>
     <div class="inputContainer">
       <input id="thoughtInput" type="text" placeholder="Type your thought..." maxlength="30" />
       <button id="addBubble">Send</button>

@@ -29,8 +29,15 @@ document.getElementById("addBubble").addEventListener("click", () => {
 });
 
 function updateMessageStatus() {
+  if (!isPageActive) return;
+
   fetch("/message-status")
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => {
       const remainingMessages = data.remainingMessages;
       const timeUntilReset = data.timeUntilReset;
@@ -39,16 +46,20 @@ function updateMessageStatus() {
       if (remainingMessages > 0) {
         statusElement.innerHTML = `You have ${remainingMessages} messages left today.`;
       } else {
-        const resetTime = new Date(timeUntilReset).toISOString().substr(11, 8); // Convert to hh:mm:ss format
+        const resetTime = new Date(timeUntilReset).toISOString().substr(11, 8);
         statusElement.innerHTML = `Message limit reached. Try again in ${resetTime}.`;
       }
     })
-    .catch((error) => console.error("Error fetching message status:", error));
+    .catch((error) => {
+      console.error("Error fetching message status:", error);
+      document.getElementById("messageStatus").innerHTML =
+        "Unable to retrieve message status. Please try again later.";
+    });
 }
 
-setInterval(updateMessageStatus, 1000);
-
 function createBubble(text) {
+  if (!isPageActive) return;
+
   const bubbleContainer = document.getElementById("bubbleContainer");
   const bubble = document.createElement("div");
   bubble.className = "bubble";
@@ -63,7 +74,7 @@ function createBubble(text) {
   bubbleContainer.appendChild(bubble);
 
   setTimeout(() => {
-    bubble.style.animation = "float 5s linear forwards";
+    bubble.style.animation = "float 8s linear forwards";
   }, 0);
 
   bubble.addEventListener("animationend", () => {
@@ -79,9 +90,11 @@ function loadNewThought(newThought) {
 }
 
 function displayRandomThoughts(thoughts) {
-  setInterval(() => {
-    const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
-    createBubble(randomThought);
+  randomThoughtInterval = setInterval(() => {
+    if (isPageActive) {
+      const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+      createBubble(randomThought);
+    }
   }, Math.random() * (7000 - 2000) + 2000);
 }
 
@@ -98,9 +111,16 @@ function loadThoughts() {
     .catch((error) => console.error("Error fetching thoughts:", error));
 }
 
+setInterval(loadThoughts, 15000);
+
+let cloudCount = 0;
+const maxClouds = 5;
+
 function createCloud() {
+  if (!isPageActive || cloudCount >= maxClouds) return;
+
   const cloud = document.createElement("img");
-  cloud.src = "https://shorturl.at/UWx63"; 
+  cloud.src = "https://shorturl.at/UWx63";
   cloud.className = "cloud";
 
   const size = Math.random() * 400 + 450;
@@ -108,28 +128,74 @@ function createCloud() {
   cloud.style.zIndex = -1;
 
   const startY = Math.random() * (window.innerHeight * 0.1);
-  const duration = 30;
 
   cloud.style.top = `${startY}px`;
   cloud.style.left = `-${size}px`;
 
-  cloud.style.animation = `moveCloud ${duration}s linear forwards`;
+  cloud.style.animation = `moveCloud 30s linear forwards`;
 
   cloud.addEventListener("animationend", () => {
     cloud.remove();
+    cloudCount--;
   });
 
   document.body.appendChild(cloud);
+  cloudCount++;
 }
 
 function generateClouds() {
-  setInterval(() => {
+  cloudInterval = setInterval(() => {
     createCloud();
   }, Math.random() * (10000 - 5000) + 5000);
 }
 
+let isPageActive = true;
+document.addEventListener("visibilitychange", () => {
+  isPageActive = !document.hidden;
+
+  if (isPageActive) {
+    if (!messageStatusInterval) {
+      messageStatusInterval = setInterval(updateMessageStatus, 1000);
+    }
+    if (!cloudInterval) {
+      cloudInterval = setInterval(() => {
+        if (isPageActive) createCloud();
+      }, Math.random() * (10000 - 5000) + 5000);
+    }
+  } else {
+    clearInterval(messageStatusInterval);
+    clearInterval(cloudInterval);
+    messageStatusInterval = null;
+    cloudInterval = null;
+  }
+});
+
+document.getElementById("rulesButton").addEventListener("click", (e) => {
+  e.preventDefault();
+  const rulesBox = document.getElementById("rulesBox");
+  rulesBox.style.display = "block";
+  setTimeout(() => {
+    rulesBox.style.opacity = 1;
+  }, 10);
+});
+
+document.getElementById("closeButton").addEventListener("click", () => {
+  const rulesBox = document.getElementById("rulesBox");
+  rulesBox.style.opacity = 0;
+  setTimeout(() => {
+    rulesBox.style.display = "none";
+  }, 500);
+});
+
+let messageStatusInterval, cloudInterval, randomThoughtInterval;
+
 window.onload = () => {
   loadThoughts();
+  createCloud();
   generateClouds();
   updateMessageStatus();
+
+  if (!messageStatusInterval) {
+    messageStatusInterval = setInterval(updateMessageStatus, 1000);
+  }
 };
