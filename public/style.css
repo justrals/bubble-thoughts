@@ -1,0 +1,94 @@
+body, html {
+  font-family: "Montserrat", serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #87CEEB, #fff);
+  overflow: hidden;
+  position: relative;
+  z-index: -2;
+}
+
+h1, p {
+  font-family: "Montserrat", serif;
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+  margin-top: calc(100vh * 0.1);
+}
+
+.container * {
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+}
+
+input, button {
+  font-family: "Montserrat", serif;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#bubbleContainer {
+  position: relative;
+  height: calc(100vh - 100px);
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(135, 206, 250, 0.8);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  word-wrap: break-word;
+  padding: 15px 20px;
+  min-width: 80px;
+  min-height: 80px;
+  animation: float 5s linear infinite;
+  animation-delay: var(--delay); 
+  pointer-events: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-500px);
+    opacity: 0;
+  }
+}
+
+.cloud {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+@keyframes moveCloud {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 100%));
+  }
+}
