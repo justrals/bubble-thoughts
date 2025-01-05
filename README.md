@@ -44,7 +44,8 @@ The project will be available at `http://localhost:3000`.
 <a href="https://github.com/justrals/twokinds-universe-website/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=justrals/bubble-thoughts" style="height:50px"/>
 </a>
-<h3>Screenshots</h3>
 
+<h3>Screenshots</h3>
+<img src="https://github.com/user-attachments/assets/8f1c1cee-b08f-4174-a7bc-c0f0a0225d0c" style="height:200px;"/> <img src="https://github.com/user-attachments/assets/87505952-c2bb-4f81-be04-31b4cf487721" style="height:200px;"/>
 
 <h3>Leave a star on my repository if you don't mind, I'd appreciate it ⭐️</h3>
