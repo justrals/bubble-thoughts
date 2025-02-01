@@ -1,4 +1,4 @@
-<img alt="Twokinds Universe" src="https://bubble-thoughts.justrals.tech/favicon.ico" width="50px" height="50px"/>
+<img src="https://bubble-thoughts.justrals.tech/favicon.ico" width="50px" height="50px"/>
 <h1>Bubble Thoughts</h1>
 <h3>What is Bubble Thoughts?</h2>
 <li>Bubble Thoughts is a website where you can post your message and it can be seen by other users!</li>
