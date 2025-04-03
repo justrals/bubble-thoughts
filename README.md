@@ -1,12 +1,5 @@
-<img src="https://bubble-thoughts.justrals.tech/favicon.ico" width="50px" height="50px"/>
 <h1>Bubble Thoughts</h1>
-<h3>What is Bubble Thoughts?</h2>
-<li>Bubble Thoughts is a website where you can post your message and it can be seen by other users!</li>
-<h3>Technologies used</h2>
-<li>NodeJS <img width="20px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/NodeJS-Dark.svg" alt="NodeJS Icon" /></li>
-<li>HTML <img width="20px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/HTML.svg" alt="HTML Icon" /></li>
-<li>CSS <img width="20px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/CSS.svg" alt="CSS Icon" /></li>
-<li>JavaScript <img width="20px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/JavaScript.svg" alt="JS Icon" /></li>
+A website where you can post your message and it can be seen by other users!
 
 <h3>Installation</h3>
 
